@@ -7,9 +7,9 @@ interface Props {
 	title: string;
 	disabled?: boolean;
 	styles: string;
-	handleClick: MouseEventHandler<HTMLButtonElement>;
-	rightIcon: React.ReactElement;
-	type?: 'button' | 'submit' | 'reset';
+	handleClick?: MouseEventHandler<HTMLButtonElement>;
+	rightIcon?: React.ReactElement;
+	type: 'button' | 'submit' | 'reset';
 }
 
 const Button = ({
@@ -27,7 +27,7 @@ const Button = ({
 			className={`custom-btn ${styles}`}
 			onClick={handleClick}>
 			<span className={`flex-1`}>{title}</span>
-			{rightIcon && <div className="relative w-6 h-6">{rightIcon}</div>}
+			{rightIcon && <div className="relative w-6 h-6 ml-4">{rightIcon}</div>}
 		</button>
 	);
 };

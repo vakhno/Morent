@@ -3,14 +3,23 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Filter, Hero, SearchBox, CarCard } from '@/components/index';
 import { getCars } from '@/utils';
+import { yearsOfProduction, fuels } from '@/constants';
+import { useSearchParams } from 'next/navigation';
 
 export default function Home() {
 	const [data, setData] = useState([]);
+	const searchParams = useSearchParams();
 	const isDataNotEmpty = Boolean(data.length);
 
 	useEffect(() => {
 		(async () => {
-			const fetchData = await getCars();
+			const fetchData = await getCars(
+				searchParams.get('manufacturer') || '',
+				searchParams.get('model') || '',
+				searchParams.get('fuel') || '',
+				(searchParams.get('year') && Number(searchParams.get('year'))) || new Date().getFullYear(),
+				(searchParams.get('limit') && Number(searchParams.get('limit'))) || 10,
+			);
 			console.log('fetchData', fetchData);
 			setData(fetchData);
 		})();
@@ -28,8 +37,8 @@ export default function Home() {
 					<SearchBox />
 				</div>
 				<div className="home__filter-container">
-					<Filter title="fuel" />
-					<Filter title="year" />
+					<Filter title="fuel" options={fuels} />
+					<Filter title="year" options={yearsOfProduction} />
 				</div>
 				{isDataNotEmpty ? (
 					<section>

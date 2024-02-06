@@ -12,3 +12,8 @@ export type CarType = {
 	transmission: string;
 	year: number;
 };
+
+export type SelectorType = {
+	title: string;
+	value: string;
+};

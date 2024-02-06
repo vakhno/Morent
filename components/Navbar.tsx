@@ -16,6 +16,7 @@ const Navbar = ({}: Props) => {
 				</Link>
 				<Button
 					title="Sign In"
+					type="button"
 					styles="text-white rounded-full bg-secondary-orange min-w-[130px]"
 					handleClick={() => {}}
 				/>

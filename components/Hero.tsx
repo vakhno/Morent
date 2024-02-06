@@ -17,6 +17,7 @@ const Hero = ({}: Props) => {
 				</p>
 				<Button
 					title="Explore Cars"
+					type="button"
 					styles="bg-primary-blue text-white rounded-full mt-10"
 					handleClick={handleScroll}
 				/>

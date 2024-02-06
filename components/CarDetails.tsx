@@ -4,6 +4,9 @@ import { CarType } from '@/types';
 import Image from 'next/image';
 import Close from '@/public/close.svg';
 import { Dialog, Transition } from '@headlessui/react';
+import MainSide from '@/public/front-side-side.png';
+import BackSide from '@/public/back-side-side.png';
+import SideSide from '@/public/side-side.png';
 
 interface Props {
 	isOpen: boolean;
@@ -36,7 +39,7 @@ const CarDetails = ({ isOpen, car, onHandleClose }: Props) => {
 								leave="ease-in duration-200"
 								leaveFrom="opacity-100 scale-100"
 								leaveTo="opacity-0 scale-95">
-								<Dialog.Panel className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto transform rounded-2xl bg-white p-6 text-left shadow-xl transition-all flex flex-col gap-5">
+								<Dialog.Panel className="p-4 relative w-full max-w-lg max-h-[90vh] overflow-y-auto transform rounded-2xl bg-white text-left shadow-xsl transition-all flex flex-col gap-5">
 									<button
 										className="absolute top-2 right-2 z-10 w-fit p-2 bg-primary-blue-100 rounded-full"
 										type="button"
@@ -51,17 +54,41 @@ const CarDetails = ({ isOpen, car, onHandleClose }: Props) => {
 									</button>
 									<div className="flex-1 flex flex-col gap-3">
 										<div className="relative w-full h-40 bg-pattern bg-cover bg-center rounded-lg">
-											<Image src={} fill priority className="object-contain" alt="car" />
+											<Image
+												src={MainSide}
+												fill
+												priority
+												className="object-contain p-4"
+												alt="car"
+											/>
 										</div>
 										<div className="flex gap-3">
 											<div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
-												<Image src={} fill priority className="object-contain" alt="car" />
+												<Image
+													src={SideSide}
+													fill
+													priority
+													className="object-contain p-1"
+													alt="car"
+												/>
 											</div>
 											<div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
-												<Image src={} fill priority className="object-contain" alt="car" />
+												<Image
+													src={MainSide}
+													fill
+													priority
+													className="object-contain p-1"
+													alt="car"
+												/>
 											</div>
 											<div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
-												<Image src={} fill priority className="object-contain" alt="car" />
+												<Image
+													src={BackSide}
+													fill
+													priority
+													className="object-contain p-1"
+													alt="car"
+												/>
 											</div>
 										</div>
 									</div>

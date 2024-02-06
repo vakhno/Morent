@@ -88,7 +88,11 @@
 
 /* START: Car Card styles */
 .car-card {
-	@apply flex flex-col p-6 justify-center items-start text-black-100 bg-primary-blue-100 hover:bg-white hover:shadow-md rounded-3xl;
+	@apply relative flex flex-col p-6 justify-center items-start text-black-100 bg-primary-blue-100;
+}
+
+.car-card__wrapper {
+	@apply flex flex-col w-full group-hover:bg-white group-hover:opacity-10 group-hover:shadow-md rounded-3xl;
 }
 
 .car-card__content {
@@ -128,7 +132,7 @@
 }
 
 .car-card__btn-container {
-	@apply hidden group-hover:flex absolute bottom-0 w-full z-10;
+	@apply hidden absolute group-hover:flex top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full mx-auto max-w-[230px];
 }
 /* END: Car Card styles */
 
@@ -188,7 +192,7 @@
 
 /* START: searchbar styles */
 .searchbar {
-	@apply flex items-center justify-start max-sm:flex-col w-full relative max-sm:gap-4 max-w-3xl;
+	@apply flex items-center justify-start max-sm:flex-col w-full relative max-sm:gap-4;
 }
 
 .searchbar__item {

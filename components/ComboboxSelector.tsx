@@ -1,30 +1,32 @@
 'use client';
 import { Combobox, Transition } from '@headlessui/react';
 import CarLogo from '@/public/car-logo.svg';
+import { SelectorType } from '@/types';
 import Image from 'next/image';
 import { useState, Fragment } from 'react';
-import { manufacturers } from '@/constants';
 
 interface Props {
 	manufacturer: string;
 	setManufacturer: (value: string) => void;
+	options: SelectorType[];
+	styles: string;
 }
 
-const SearchManufacturer = ({ manufacturer, setManufacturer }: Props) => {
+const ComboboxSelector = ({ manufacturer, setManufacturer, options, styles }: Props) => {
 	const [query, setQuery] = useState('');
 
 	const filteredManufacturers =
 		query === ''
-			? manufacturers
-			: manufacturers.filter((manufacturer) =>
-					manufacturer
+			? options
+			: options.filter((option) =>
+					option.value
 						.toLowerCase()
 						.replace(/\s+/g, '')
 						.includes(query.toLowerCase().replace(/\s+/g, '')),
 			  );
 
 	return (
-		<div className="search-manufacturer">
+		<div className={`search-manufacturer ${styles}`}>
 			<Combobox value={manufacturer} onChange={setManufacturer}>
 				<div className="relative w-full">
 					<Combobox.Button className="absolute top-[14px]">
@@ -41,14 +43,14 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: Props) => {
 						leaveFrom="opacity-100"
 						leaveTo="opactiy-0"
 						afterLeave={() => setQuery('')}>
-						<Combobox.Options>
+						<Combobox.Options className="absolute w-full z-10 max-h-[300px] overflow-auto">
 							{filteredManufacturers.length === 0 && query !== ''
 								? filteredManufacturers.map((manufacturer) => {
 										return (
 											<Combobox.Option
-												key={manufacturer}
-												value={manufacturer}
-												className="search-manufacturer__option">
+												key={manufacturer.value}
+												value={manufacturer.value}
+												className="search-manufacturer__option ">
 												Create '{query}'
 											</Combobox.Option>
 										);
@@ -56,11 +58,11 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: Props) => {
 								: filteredManufacturers.map((manufacturer) => {
 										return (
 											<Combobox.Option
-												key={manufacturer}
-												value={manufacturer}
+												key={manufacturer.value}
+												value={manufacturer.value}
 												className={({ active }) =>
 													`relative search-manufacturer__option ${
-														active ? 'bg-primary-blue text-white' : 'text-gray-900'
+														active ? 'bg-primary-blue text-white' : 'text-gray-900 bg-white'
 													}`
 												}>
 												{({ selected, active }) => {
@@ -70,7 +72,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: Props) => {
 																className={`block truncate ${
 																	selected ? 'font-medium' : 'font-normal'
 																}`}>
-																{manufacturer}
+																{manufacturer.title}
 															</span>
 															{selected ? (
 																<span
@@ -92,4 +94,4 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: Props) => {
 	);
 };
 
-export default SearchManufacturer;
+export default ComboboxSelector;

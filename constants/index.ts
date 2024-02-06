@@ -1,45 +1,168 @@
 export const manufacturers = [
-	'Acura',
-	'Alfa Romeo',
-	'Aston Martin',
-	'Audi',
-	'Bentley',
-	'BMW',
-	'Buick',
-	'Cadillac',
-	'Chevrolet',
-	'Chrysler',
-	'Citroen',
-	'Dodge',
-	'Ferrari',
-	'Fiat',
-	'Ford',
-	'GMC',
-	'Honda',
-	'Hyundai',
-	'Infiniti',
-	'Jaguar',
-	'Jeep',
-	'Kia',
-	'Lamborghini',
-	'Land Rover',
-	'Lexus',
-	'Lincoln',
-	'Maserati',
-	'Mazda',
-	'McLaren',
-	'Mercedes-Benz',
-	'MINI',
-	'Mitsubishi',
-	'Nissan',
-	'Porsche',
-	'Ram',
-	'Rolls-Royce',
-	'Subaru',
-	'Tesla',
-	'Toyota',
-	'Volkswagen',
-	'Volvo',
+	{
+		title: 'Acura',
+		value: 'Acura',
+	},
+	{
+		title: 'Alfa Romeo',
+		value: 'Alfa Romeo',
+	},
+	{
+		title: 'Aston Martin',
+		value: 'Aston Martin',
+	},
+	{
+		title: 'Audi',
+		value: 'Audi',
+	},
+	{
+		title: 'Bentley',
+		value: 'Bentley',
+	},
+	{
+		title: 'BMW',
+		value: 'BMW',
+	},
+	{
+		title: 'Buick',
+		value: 'Buick',
+	},
+	{
+		title: 'Cadillac',
+		value: 'Cadillac',
+	},
+	{
+		title: 'Chevrolet',
+		value: 'Chevrolet',
+	},
+	{
+		title: 'Chrysler',
+		value: 'Chrysler',
+	},
+	{
+		title: 'Citroen',
+		value: 'Citroen',
+	},
+	{
+		title: 'Dodge',
+		value: 'Dodge',
+	},
+	{
+		title: 'Ferrari',
+		value: 'Ferrari',
+	},
+	{
+		title: 'Fiat',
+		value: 'Fiat',
+	},
+	{
+		title: 'Ford',
+		value: 'Ford',
+	},
+	{
+		title: 'GMC',
+		value: 'GMC',
+	},
+	{
+		title: 'Honda',
+		value: 'Honda',
+	},
+	{
+		title: 'Hyundai',
+		value: 'Hyundai',
+	},
+	{
+		title: 'Infiniti',
+		value: 'Infiniti',
+	},
+	{
+		title: 'Jaguar',
+		value: 'Jaguar',
+	},
+	{
+		title: 'Jeep',
+		value: 'Jeep',
+	},
+	{
+		title: 'Kia',
+		value: 'Kia',
+	},
+	{
+		title: 'Lamborghini',
+		value: 'Lamborghini',
+	},
+	{
+		title: 'Land Rover',
+		value: 'Land Rover',
+	},
+	{
+		title: 'Lexus',
+		value: 'Lexus',
+	},
+	{
+		title: 'Lincoln',
+		value: 'Lincoln',
+	},
+	{
+		title: 'Maserati',
+		value: 'Maserati',
+	},
+	{
+		title: 'Mazda',
+		value: 'Mazda',
+	},
+	{
+		title: 'McLaren',
+		value: 'McLaren',
+	},
+	{
+		title: 'Mercedes-Benz',
+		value: 'Mercedes-Benz',
+	},
+	{
+		title: 'MINI',
+		value: 'MINI',
+	},
+	{
+		title: 'Mitsubishi',
+		value: 'Mitsubishi',
+	},
+	{
+		title: 'Nissan',
+		value: 'Nissan',
+	},
+	{
+		title: 'Porsche',
+		value: 'Porsche',
+	},
+	{
+		title: 'Ram',
+		value: 'Ram',
+	},
+	{
+		title: 'Rolls-Royce',
+		value: 'Rolls-Royce',
+	},
+	{
+		title: 'Subaru',
+		value: 'Subaru',
+	},
+	{
+		title: 'Tesla',
+		value: 'Tesla',
+	},
+	{
+		title: 'Toyota',
+		value: 'Toyota',
+	},
+	{
+		title: 'Volkswagen',
+		value: 'Volkswagen',
+	},
+	{
+		title: 'Volvo',
+		value: 'Volvo',
+	},
 ];
 
 export const yearsOfProduction = [

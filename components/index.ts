@@ -4,7 +4,19 @@ import Footer from './Footer';
 import SearchBox from './SearchBox';
 import Filter from './Filter';
 import CarCard from './CarCard';
-import SearchManufacturer from './SearchManufacturer';
+import ComboboxSelector from './ComboboxSelector';
 import Button from './Button';
 import CarDetails from './CarDetails';
-export { Button, Hero, Footer, Navbar, Filter, SearchBox, SearchManufacturer, CarCard, CarDetails };
+import Input from './Input';
+export {
+	Button,
+	Hero,
+	Footer,
+	Navbar,
+	Filter,
+	SearchBox,
+	ComboboxSelector,
+	CarCard,
+	CarDetails,
+	Input,
+};
