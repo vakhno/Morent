@@ -3,14 +3,11 @@ import React, { useState } from 'react';
 import { ComboboxSelector } from '.';
 import Glass from '@/public/magnifying-glass.svg';
 import Image from 'next/image';
-import Model from '@/public/model-icon.png';
 import { useRouter } from 'next/navigation';
 import { Button, Input } from '@/components';
 import { manufacturers } from '@/constants';
 
-type Props = {};
-
-const SearchBox = (props: Props) => {
+const SearchBox = () => {
 	const [manufacturer, setManufacturer] = useState('');
 	const [model, setModel] = useState('');
 	const router = useRouter();
@@ -34,9 +31,9 @@ const SearchBox = (props: Props) => {
 		}
 
 		if (manufacturer) {
-			searchParams.set('manufacturer', manufacturer);
+			searchParams.set('make', manufacturer);
 		} else {
-			searchParams.delete('manufacturer');
+			searchParams.delete('make');
 		}
 
 		const newPathname = `${window.location.pathname}?${searchParams.toString()}`;

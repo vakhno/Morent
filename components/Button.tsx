@@ -1,7 +1,6 @@
 'use client';
 import { MouseEventHandler } from 'react';
 import React from 'react';
-import Image from 'next/image';
 
 interface Props {
 	title: string;

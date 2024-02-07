@@ -4,9 +4,7 @@ import Image from 'next/image';
 import Button from './Button';
 import Car from '@/public/hero.png';
 
-interface Props {}
-
-const Hero = ({}: Props) => {
+const Hero = () => {
 	const handleScroll = () => {};
 	return (
 		<div className="hero">

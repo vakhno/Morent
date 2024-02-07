@@ -1,29 +1,33 @@
 'use client';
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import { useEffect } from 'react';
 import { Filter, Hero, SearchBox, CarCard } from '@/components/index';
-import { getCars } from '@/utils';
 import { yearsOfProduction, fuels } from '@/constants';
 import { useSearchParams } from 'next/navigation';
+import { ShowMore } from '@/components';
+import { useAppDispatch } from '@/redux/store';
+import { useSelector } from 'react-redux';
+import { fetchData } from '@/redux/slices/dataSlice';
+import { RootState } from '@/redux/store';
+import { setFilterFuel, setFilterYear } from '@/redux/slices/filterSlice';
 
 export default function Home() {
-	const [data, setData] = useState([]);
+	const { data, vehiclePerPage } = useSelector((state: RootState) => state.data);
+	const { filterFuel, filterYear } = useSelector((state: RootState) => state.filter);
+	const { searchMake, searchModel } = useSelector((state: RootState) => state.search);
 	const searchParams = useSearchParams();
+	const dispatch = useAppDispatch();
 	const isDataNotEmpty = Boolean(data.length);
 
 	useEffect(() => {
-		(async () => {
-			const fetchData = await getCars(
-				searchParams.get('manufacturer') || '',
-				searchParams.get('model') || '',
-				searchParams.get('fuel') || '',
-				(searchParams.get('year') && Number(searchParams.get('year'))) || new Date().getFullYear(),
-				(searchParams.get('limit') && Number(searchParams.get('limit'))) || 10,
-			);
-			console.log('fetchData', fetchData);
-			setData(fetchData);
-		})();
-	}, []);
+		const params = {
+			make: searchMake,
+			model: searchModel,
+			fuel: filterFuel,
+			year: filterYear,
+			limit: vehiclePerPage,
+		};
+		dispatch(fetchData(params));
+	}, [vehiclePerPage, filterFuel, filterYear, searchMake, searchModel]);
 
 	return (
 		<main className="overflow-hidden">
@@ -37,8 +41,12 @@ export default function Home() {
 					<SearchBox />
 				</div>
 				<div className="home__filter-container">
-					<Filter title="fuel" options={fuels} />
-					<Filter title="year" options={yearsOfProduction} />
+					<Filter title="Fuel" options={fuels} handleChange={(e) => dispatch(setFilterFuel(e))} />
+					<Filter
+						title="Year"
+						options={yearsOfProduction}
+						handleChange={(e) => dispatch(setFilterYear(e))}
+					/>
 				</div>
 				{isDataNotEmpty ? (
 					<section>
@@ -51,9 +59,16 @@ export default function Home() {
 				) : (
 					<div className="home__error-container">
 						<h2 className="text-black text-xl font-bold">Ooops, no results</h2>
-						{/* <p>{data?.message}</p> */}
 					</div>
 				)}
+				<ShowMore
+					styles="m-auto mt-8"
+					title="Show More"
+					pageNumber={((searchParams.get('limit') && Number(searchParams.get('limit'))) || 10) / 10}
+					isNext={
+						((searchParams.get('limit') && Number(searchParams.get('limit'))) || 10) > data.length
+					}
+				/>
 			</div>
 		</main>
 	);

@@ -2,9 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Logo from '@/public/logo.svg';
 import { footerLinks } from '@/constants';
-type Props = {};
 
-const Footer = (props: Props) => {
+const Footer = () => {
 	return (
 		<footer className="flex felx-col text-black-100 mt-5 border-t border-gray-100">
 			<div className="flex max-md:flex-col flex-wrap justify-between gap-5 sm:px-16 px-6 py-10">

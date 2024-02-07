@@ -17,3 +17,11 @@ export type SelectorType = {
 	title: string;
 	value: string;
 };
+
+export type SearchDataType = {
+	make: string;
+	model: string;
+	fuel: string;
+	year: number;
+	limit: number;
+};

@@ -8,6 +8,7 @@ import ComboboxSelector from './ComboboxSelector';
 import Button from './Button';
 import CarDetails from './CarDetails';
 import Input from './Input';
+import ShowMore from './ShowMore';
 export {
 	Button,
 	Hero,
@@ -19,4 +20,5 @@ export {
 	CarCard,
 	CarDetails,
 	Input,
+	ShowMore,
 };
