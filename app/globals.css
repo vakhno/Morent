@@ -73,8 +73,12 @@
 	@apply mt-12 w-full flex-between items-center flex-wrap gap-5;
 }
 
+.home__loading {
+	@apply text-center;
+}
+
 .home__filter-container {
-	@apply flex justify-start flex-wrap items-center gap-2;
+	@apply flex justify-start flex-wrap items-center gap-2 max-sm:flex-col;
 }
 
 .home__cars-wrapper {
@@ -192,7 +196,7 @@
 
 /* START: searchbar styles */
 .searchbar {
-	@apply flex items-center justify-start max-sm:flex-col w-full relative max-sm:gap-4;
+	@apply flex items-center justify-start max-sm:flex-col w-full relative max-sm:gap-4 mb-4;
 }
 
 .searchbar__item {

@@ -6,22 +6,35 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Button, Input } from '@/components';
 import { manufacturers } from '@/constants';
+import { RootState, useAppDispatch } from '@/redux/store';
+import { fetchData } from '@/redux/slices/dataSlice';
+import { setSearchMake, setSearchModel } from '@/redux/slices/searchSlice';
+import { useSelector } from 'react-redux';
 
 const SearchBox = () => {
-	const [manufacturer, setManufacturer] = useState('');
-	const [model, setModel] = useState('');
+	const { vehiclePerPage } = useSelector((state: RootState) => state.data);
+	const { filterFuel, filterYear } = useSelector((state: RootState) => state.filter);
+	const { searchMake, searchModel } = useSelector((state: RootState) => state.search);
 	const router = useRouter();
+	const dispatch = useAppDispatch();
 
 	const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (manufacturer === '' && model === '') {
+		if (searchMake === '' && searchModel === '') {
 			return alert('Please fill in the search bar');
 		}
-
-		updateSearchParams(model.toLowerCase(), manufacturer.toLowerCase());
+		updateSearchParams(searchMake.toLowerCase(), searchModel.toLowerCase());
+		const params = {
+			make: searchMake,
+			model: searchModel,
+			fuel: filterFuel,
+			year: filterYear,
+			limit: vehiclePerPage,
+		};
+		dispatch(fetchData(params));
 	};
 
-	const updateSearchParams = (model: string, manufacturer: string) => {
+	const updateSearchParams = (make: string, model: string) => {
 		const searchParams = new URLSearchParams(window.location.search);
 
 		if (model) {
@@ -30,8 +43,8 @@ const SearchBox = () => {
 			searchParams.delete('model');
 		}
 
-		if (manufacturer) {
-			searchParams.set('make', manufacturer);
+		if (make) {
+			searchParams.set('make', make);
 		} else {
 			searchParams.delete('make');
 		}
@@ -46,14 +59,14 @@ const SearchBox = () => {
 			<div className="searchbar__item">
 				<ComboboxSelector
 					options={manufacturers}
-					manufacturer={manufacturer}
-					setManufacturer={setManufacturer}
+					value={searchMake}
+					handleChange={(e) => dispatch(setSearchMake(e))}
 					styles="sm:mr-4"
 				/>
 			</div>
 			<div className="searchbar__item">
 				<Input
-					value={model}
+					value={searchModel}
 					placeholder="Tiguan"
 					leftIcon={{
 						src: '/model-icon.png',
@@ -62,7 +75,7 @@ const SearchBox = () => {
 						height: 20,
 						className: 'object-contain',
 					}}
-					handleOnChange={setModel}
+					handleOnChange={(e) => dispatch(setSearchModel(e))}
 					styles="w-full sm:mr-4"
 				/>
 			</div>

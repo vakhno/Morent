@@ -9,25 +9,40 @@ import { useSelector } from 'react-redux';
 import { fetchData } from '@/redux/slices/dataSlice';
 import { RootState } from '@/redux/store';
 import { setFilterFuel, setFilterYear } from '@/redux/slices/filterSlice';
+import { setSearchMake, setSearchModel } from '@/redux/slices/searchSlice';
+import { setVehiclePerPage } from '@/redux/slices/dataSlice';
+import { dataLoadingStatus } from '@/enums';
 
 export default function Home() {
-	const { data, vehiclePerPage } = useSelector((state: RootState) => state.data);
+	const { data, vehiclePerPage, dataLoading } = useSelector((state: RootState) => state.data);
 	const { filterFuel, filterYear } = useSelector((state: RootState) => state.filter);
 	const { searchMake, searchModel } = useSelector((state: RootState) => state.search);
 	const searchParams = useSearchParams();
 	const dispatch = useAppDispatch();
-	const isDataNotEmpty = Boolean(data.length);
+
+	useEffect(() => {
+		const make = searchParams.get('make')?.toString() || searchMake || '';
+		const model = searchParams.get('model')?.toString() || searchModel || '';
+		const year = searchParams.get('year')?.toString() || filterYear || '';
+		const fuel = searchParams.get('fuel')?.toString() || filterFuel || '';
+		const limit = searchParams.get('limit')?.toString() || vehiclePerPage || '10';
+		dispatch(setSearchMake(make));
+		dispatch(setSearchModel(model));
+		dispatch(setFilterYear(year));
+		dispatch(setFilterFuel(fuel));
+		dispatch(setVehiclePerPage(limit));
+	}, []);
 
 	useEffect(() => {
 		const params = {
-			make: searchMake,
-			model: searchModel,
-			fuel: filterFuel,
-			year: filterYear,
-			limit: vehiclePerPage,
+			make: searchMake.toString(),
+			model: searchModel.toString(),
+			fuel: filterFuel.toString(),
+			year: filterYear.toString(),
+			limit: vehiclePerPage.toString(),
 		};
 		dispatch(fetchData(params));
-	}, [vehiclePerPage, filterFuel, filterYear, searchMake, searchModel]);
+	}, [vehiclePerPage, filterFuel, filterYear]);
 
 	return (
 		<main className="overflow-hidden">
@@ -41,34 +56,53 @@ export default function Home() {
 					<SearchBox />
 				</div>
 				<div className="home__filter-container">
-					<Filter title="Fuel" options={fuels} handleChange={(e) => dispatch(setFilterFuel(e))} />
 					<Filter
-						title="Year"
+						value={filterFuel}
+						title="fuel"
+						options={fuels}
+						handleChange={(e) => dispatch(setFilterFuel(e))}
+					/>
+					<Filter
+						value={filterYear}
+						title="year"
 						options={yearsOfProduction}
 						handleChange={(e) => dispatch(setFilterYear(e))}
 					/>
 				</div>
-				{isDataNotEmpty ? (
-					<section>
-						<div className="home__cars-wrapper">
-							{data.map((item) => (
-								<CarCard car={item} />
-							))}
-						</div>
-					</section>
-				) : (
+				{dataLoading === dataLoadingStatus.LOADING ? (
+					<div className="home__loading">LOADING...</div>
+				) : dataLoading === dataLoadingStatus.ERROR ? (
 					<div className="home__error-container">
-						<h2 className="text-black text-xl font-bold">Ooops, no results</h2>
+						<h2 className="text-black text-xl font-bold">Ooops, error, try to refresh!</h2>
 					</div>
-				)}
-				<ShowMore
-					styles="m-auto mt-8"
-					title="Show More"
-					pageNumber={((searchParams.get('limit') && Number(searchParams.get('limit'))) || 10) / 10}
-					isNext={
-						((searchParams.get('limit') && Number(searchParams.get('limit'))) || 10) > data.length
-					}
-				/>
+				) : dataLoading === dataLoadingStatus.SUCCESS ? (
+					data.length ? (
+						<>
+							<section>
+								<div className="home__cars-wrapper">
+									{data.map((item, index) => (
+										<CarCard key={`${item.make}_${item.model}_${item.year}_${index}`} car={item} />
+									))}
+								</div>
+							</section>
+							<ShowMore
+								styles="m-auto mt-8"
+								title="Show More"
+								pageNumber={
+									((searchParams.get('limit') && Number(searchParams.get('limit'))) || 10) / 10
+								}
+								isNext={
+									((searchParams.get('limit') && Number(searchParams.get('limit'))) || 10) >
+									data.length
+								}
+							/>
+						</>
+					) : (
+						<div className="home__error-container">
+							<h2 className="text-black text-xl font-bold">Ooops, no results!</h2>
+						</div>
+					)
+				) : null}
 			</div>
 		</main>
 	);

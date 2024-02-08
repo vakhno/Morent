@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type filterInitialStateType = {
 	filterFuel: string;
-	filterYear: number;
+	filterYear: string;
 };
 
 const initialState: filterInitialStateType = {
 	filterFuel: '',
-	filterYear: new Date().getFullYear() - 1, // -1 of curent year because DB doesnt contain newest vehicles
+	filterYear: (new Date().getFullYear() - 1).toString(), // -1 of current year (2024), because DB contain too old data
 };
 
 export const filterSlice = createSlice({
@@ -17,10 +17,8 @@ export const filterSlice = createSlice({
 		setFilterFuel: (state, action: PayloadAction<string>) => {
 			state.filterFuel = action.payload;
 		},
-		setFilterYear: (state, action: PayloadAction<string | number>) => {
-			const updatedYear =
-				typeof action.payload === 'string' ? Number(action.payload) : action.payload;
-			state.filterYear = updatedYear;
+		setFilterYear: (state, action: PayloadAction<string>) => {
+			state.filterYear = action.payload;
 		},
 	},
 });

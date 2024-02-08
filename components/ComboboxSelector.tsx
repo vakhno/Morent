@@ -6,16 +6,16 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 interface Props {
-	manufacturer: string;
-	setManufacturer: (value: string) => void;
+	value: string;
+	handleChange: (value: string) => void;
 	options: SelectorType[];
 	styles: string;
 }
 
-const ComboboxSelector = ({ manufacturer, setManufacturer, options, styles }: Props) => {
+const ComboboxSelector = ({ value, handleChange, options, styles }: Props) => {
 	const [query, setQuery] = useState('');
 
-	const filteredManufacturers =
+	const filteredValues =
 		query === ''
 			? options
 			: options.filter((option) =>
@@ -27,7 +27,7 @@ const ComboboxSelector = ({ manufacturer, setManufacturer, options, styles }: Pr
 
 	return (
 		<div className={`search-manufacturer ${styles}`}>
-			<Combobox value={manufacturer} onChange={setManufacturer}>
+			<Combobox value={value} onChange={handleChange}>
 				<div className="relative w-full">
 					<Combobox.Button className="absolute top-[14px]">
 						<Image src={CarLogo} className="ml-4" width={20} height={20} alt="car-logo" />
@@ -44,22 +44,22 @@ const ComboboxSelector = ({ manufacturer, setManufacturer, options, styles }: Pr
 						leaveTo="opactiy-0"
 						afterLeave={() => setQuery('')}>
 						<Combobox.Options className="absolute w-full z-10 max-h-[300px] overflow-auto">
-							{filteredManufacturers.length === 0 && query !== ''
-								? filteredManufacturers.map((manufacturer) => {
+							{filteredValues.length === 0 && query !== ''
+								? filteredValues.map((option) => {
 										return (
 											<Combobox.Option
-												key={manufacturer.value}
-												value={manufacturer.value}
+												key={option.value}
+												value={option.value}
 												className="search-manufacturer__option ">
 												Create '{query}'
 											</Combobox.Option>
 										);
 								  })
-								: filteredManufacturers.map((manufacturer) => {
+								: filteredValues.map((option) => {
 										return (
 											<Combobox.Option
-												key={manufacturer.value}
-												value={manufacturer.value}
+												key={option.value}
+												value={option.value}
 												className={({ active }) =>
 													`relative search-manufacturer__option ${
 														active ? 'bg-primary-blue text-white' : 'text-gray-900 bg-white'
@@ -72,7 +72,7 @@ const ComboboxSelector = ({ manufacturer, setManufacturer, options, styles }: Pr
 																className={`block truncate ${
 																	selected ? 'font-medium' : 'font-normal'
 																}`}>
-																{manufacturer.title}
+																{option.title}
 															</span>
 															{selected ? (
 																<span

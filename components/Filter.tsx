@@ -11,10 +11,14 @@ interface Props {
 	title: string;
 	options: SelectorType[];
 	handleChange: (value: string) => void;
+	value?: string;
 }
 
-const Filter = ({ title, options, handleChange }: Props) => {
-	const [selected, setSelected] = useState<SelectorType>(options[0]);
+const Filter = ({ title, options, handleChange, value }: Props) => {
+	const [selected, setSelected] = useState<SelectorType>(
+		(value && options.find((option) => option.value === value)) || options[0],
+	);
+
 	const router = useRouter();
 
 	const handleUpdateParams = (e: SelectorType) => {
@@ -25,14 +29,14 @@ const Filter = ({ title, options, handleChange }: Props) => {
 	};
 
 	return (
-		<div className="w-fit">
+		<div className="w-fit max-sm:w-full">
 			<Listbox
 				value={selected}
 				onChange={(e) => {
 					setSelected(e);
 					handleUpdateParams(e);
 				}}>
-				<div className="relative w-fit z-10">
+				<div className="relative w-fit z-10 max-sm:w-full">
 					<Listbox.Button className="custom-filter__btn">
 						<span className="block truncate">{selected.title}</span>
 						<Image

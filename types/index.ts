@@ -22,6 +22,6 @@ export type SearchDataType = {
 	make: string;
 	model: string;
 	fuel: string;
-	year: number;
-	limit: number;
+	year: string;
+	limit: string;
 };
