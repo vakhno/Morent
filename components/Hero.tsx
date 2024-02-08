@@ -1,13 +1,14 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import Button from './Button';
+import { Button } from '@/components';
 import Car from '@/public/hero.png';
 
 const Hero = () => {
 	const handleScroll = () => {
 		window.location.href = '#discover';
 	};
+
 	return (
 		<div className="hero">
 			<div className="flex-1 pt-36 padding-x">

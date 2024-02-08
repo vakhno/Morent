@@ -43,7 +43,7 @@ const ComboboxSelector = ({ value, handleChange, options, styles }: Props) => {
 						leaveFrom="opacity-100"
 						leaveTo="opactiy-0"
 						afterLeave={() => setQuery('')}>
-						<Combobox.Options className="absolute w-full z-10 max-h-[300px] overflow-auto">
+						<Combobox.Options className="absolute w-full z-50 max-h-[300px] overflow-auto">
 							{filteredValues.length === 0 && query !== ''
 								? filteredValues.map((option) => {
 										return (

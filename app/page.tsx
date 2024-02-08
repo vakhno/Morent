@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Filter, Hero, SearchBox, CarCard } from '@/components/index';
 import { yearsOfProduction, fuels } from '@/constants';
 import { useSearchParams } from 'next/navigation';
-import { ShowMore } from '@/components';
+import { ShowMore, CardSkeleton } from '@/components';
 import { useAppDispatch } from '@/redux/store';
 import { useSelector } from 'react-redux';
 import { fetchData } from '@/redux/slices/dataSlice';
@@ -70,7 +70,9 @@ export default function Home() {
 					/>
 				</div>
 				{dataLoading === dataLoadingStatus.LOADING ? (
-					<div className="home__loading">LOADING...</div>
+					<div className="home__cars-wrapper">
+						<CardSkeleton quantity={Number(vehiclePerPage)} />
+					</div>
 				) : dataLoading === dataLoadingStatus.ERROR ? (
 					<div className="home__error-container">
 						<h2 className="text-black text-xl font-bold">Ooops, error, try to refresh!</h2>

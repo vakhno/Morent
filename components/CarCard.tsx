@@ -8,7 +8,7 @@ import Wheel from '@/public/steering-wheel.svg';
 import Tire from '@/public/tire.svg';
 import Gas from '@/public/gas.svg';
 import RightArrow from '@/public/right-arrow.svg';
-import { Button, CarDetails } from '@/components/';
+import { Button, CarDetails } from '@/components';
 
 interface Props {
 	car: CarType;

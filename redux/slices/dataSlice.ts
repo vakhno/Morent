@@ -18,7 +18,7 @@ const initialState: dataInitialStateType = {
 export const fetchData = createAsyncThunk<CarType[], SearchDataType>(
 	'data/fetchData',
 	async ({ make, model, fuel, year, limit }) => {
-		console.log('make, model, fuel, year, limit', make, model, fuel, year, limit);
+		await new Promise((resolve) => setTimeout(resolve, 300)); // to display skeletons more clearly
 		const url = 'https://cars-by-api-ninjas.p.rapidapi.com/v1/cars';
 		const key = '7c9f770815msh49ad6e51ed9a9d4p1be69djsn11f5aac32c95';
 		const host = 'cars-by-api-ninjas.p.rapidapi.com';

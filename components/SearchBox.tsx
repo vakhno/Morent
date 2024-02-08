@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { ComboboxSelector } from '.';
 import Glass from '@/public/magnifying-glass.svg';
 import Image from 'next/image';

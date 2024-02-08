@@ -1,11 +1,11 @@
 import Image, { ImageProps } from 'next/image';
 import React, { InputHTMLAttributes } from 'react';
 
-type Props = InputHTMLAttributes<HTMLInputElement> & {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	leftIcon: ImageProps;
 	handleOnChange: (value: string) => void;
 	styles?: string;
-};
+}
 
 const Input = ({ leftIcon, handleOnChange, styles, ...rest }: Props) => {
 	return (

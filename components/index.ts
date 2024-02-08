@@ -9,6 +9,7 @@ import Button from './Button';
 import CarDetails from './CarDetails';
 import Input from './Input';
 import ShowMore from './ShowMore';
+import CardSkeleton from './CardSkeleton';
 export {
 	Button,
 	Hero,
@@ -21,4 +22,5 @@ export {
 	CarDetails,
 	Input,
 	ShowMore,
+	CardSkeleton,
 };
